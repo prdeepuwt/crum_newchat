@@ -1,0 +1,38 @@
+<html>
+<head>
+  <title>Crum</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<% if user_signed_in? %>
+
+<div id="navbar" style="background:rgba(20,20,20,0.9); padding: 10px;">
+
+  <% if user_signed_in? %>
+    <div class="ui dropdown basic button inverted right floated">
+      <div class="text"><i class="icon user"></i><%= current_user.email %><i class="dropdown icon"></i></div><br />
+      <div class="menu">
+        <%= link_to "Sign Out", destroy_user_session_path, method: :delete, :class => 'item'  %>
+        <%= link_to 'Change Password', edit_user_registration_path, :class => 'item' %>
+      </div>
+    </div>
+
+
+  <% else %>
+    <a href="/users/sign_up" class="ui basic button inverted right floated" style="margin-right: 15px;">Sign Up</a>
+  <% end %>
+
+  </p>
+</div>
+
+
+
+
+
+<% end %>
+</body>
+
+</html>
