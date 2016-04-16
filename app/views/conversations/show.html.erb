@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @conversation.name %>
+</p>
+
+<p>
+  <strong>Kind:</strong>
+  <%= @conversation.kind %>
+</p>
+
+<%= link_to 'Edit', edit_conversation_path(@conversation) %> |
+<%= link_to 'Back', conversations_path %>
+<div class="row">
+  <div class="col-md-12">
+    <class="col-md-5">
+      <h1>#Conversations Name</h1>
+      <span>Number of member</span>
+    </div>
+  </div>
+</div>
+<div class="row" id="conversation_<%= @conversation.id %>">
+  <%= render(@conversation.messages) %>
+</div>
+<%= render('messages/form') %>
