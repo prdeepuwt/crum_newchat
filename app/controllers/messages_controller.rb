@@ -4,7 +4,7 @@ class MessagesController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @messages = Messages.all
+    @messages = Message.all
   end
 
   # GET /posts/1

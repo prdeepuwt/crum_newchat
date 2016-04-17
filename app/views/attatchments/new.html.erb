@@ -1,0 +1,22 @@
+<%= simple_form_for(@attatchment) do |f| %>
+  <% if @attatchment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@attatchment.errors.count, "error") %> prohibited this file from being saved:</h2>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :comment %><br />
+    <%= f.text_field :comment, autofocus: true %>
+  </div>
+  <div class="field">
+    <%= f.association :message, label_method: :body, value_method: :id, include_blank: false %>
+  </div>
+  <div class="field">
+    <%= f.input :attatchment, autofocus: true, required: true, unique: true %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Add file" %>
+  </div>
+<% end %>
+<%= render('shared/error_messages', {:object=>@attatchment}) %>
+

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :messages
-  resources :channels
+  resources :attatchments
   resources :after_signup
   resources :bookmarks, only: [:index, :create, :destroy]
   devise_for :users, :controllers => { registrations: 'registrations' }

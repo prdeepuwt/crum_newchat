@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160416123913) do
+ActiveRecord::Schema.define(version: 20160417044720) do
+
+  create_table "attatchments", force: :cascade do |t|
+    t.integer  "message_id"
+    t.string   "file"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text     "comment"
+  end
+
+  add_index "attatchments", ["message_id"], name: "index_attatchments_on_message_id"
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer  "user_id"
