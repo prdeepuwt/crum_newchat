@@ -1,1 +1,1 @@
-$('#conversation_<%= @message.conversation_id %>').append('<%= escape_javascript(render(@message)) %>')
+socket.emit('chat message', '<%= @message.conversation.id %>_<%= escape_javascript(render(@message)) %>');

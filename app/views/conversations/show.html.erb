@@ -24,3 +24,10 @@
   <%= render(@conversation.messages) %>
 </div>
 <%= render('messages/form') %>
+<script>
+socket.on('chat message', function(msg){
+  conversation_id = msg.substring(0, 1)
+  message = msg.substring(2, msg.length)
+  $('#conversation_' + conversation_id).append(message)
+});
+</script>

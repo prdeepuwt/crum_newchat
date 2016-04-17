@@ -16,8 +16,6 @@
 //= require_tree .
 
 
-
-
 function getCaret(el) {
 
     if (el.selectionStart) {
