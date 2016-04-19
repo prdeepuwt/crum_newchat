@@ -18,6 +18,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 gem 'carrierwave'
 gem 'simple_form'
+gem 'jquery-atwho-rails'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -31,7 +32,8 @@ gem 'jbuilder', '~> 2.0'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
+  gem 'rails_layout'
+  gem 'bootstrap-generators', '~> 3.3.4'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -42,6 +44,9 @@ group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 3.0'
   gem 'listen', '~> 3.0.5'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'quiet_assets'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'

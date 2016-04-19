@@ -1,35 +1,41 @@
+<div class="center jumbotron landing_focus">
+<div class=ui segment inverted" style="opacity: 1; top: 300px; width:300px; margin: 0 auto; background: rgba(0,0,0,0); padding: 30px 20px 10px 20px;">
 <h2>Sign up</h2>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
   <div class="field">
     <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true %>
+    <%= f.text_field :name, class: 'form-control', autofocus: true %>
   </div>
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    <%= f.email_field :email, class: 'form-control', autofocus: true %>
+  </div>
+  <div class="field">
+    <%= f.input :interests, as: :text, class: 'form-control', autofocus: true %>
   </div>
   <div class="field">
     <%= f.label :profile %><br />
-    <%= f.input :avatar, autofocus: true, required: true, unique: true %>
+    <%= f.input :avatar, autofocus: true, class: 'form-control', required: true, unique: true %>
   </div>
   <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    <%= f.password_field :password, class: 'form-control', autocomplete: "off" %>
   </div>
 
   <div class="field">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    <%= f.password_field :password_confirmation, class: 'form-control', autocomplete: "off" %>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+  <div class="actions field">
+    <%= f.submit "Sign up", class: "btn btn-default" %>
   </div>
 <% end %>
 
 <%= render "devise/shared/links" %>
+</div>
+</div>

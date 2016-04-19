@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :tags
   resources :messages
   resources :attatchments
   resources :after_signup

@@ -1,0 +1,48 @@
+@import "bootstrap-variables.scss";
+@import "bootstrap-sprockets.scss";
+@import "bootstrap.scss";
+
+body {
+  padding-top: $navbar-height + 10px;
+}
+
+.page-header {
+  a.btn {
+    float: right;
+  }
+
+  a.btn + a.btn {
+    margin-right: 8px;
+  }
+}
+
+input[type="radio"], input[type="checkbox"] {
+  width: initial;
+  height: initial;
+  margin-top: 7px;
+}
+
+.navbar-inverse {
+  //background: rgba(0, 0, 0, 0) linear-gradient(#1a75ff, #1a75ff) repeat scroll 0 0;
+  border-color: #090909;
+}
+.navbar-inverse .navbar-brand {
+  color: #fff;
+}
+.navbar-inverse .navbar-nav > li > a {
+  color: #fff;
+}
+.navbar-brand {
+  float: left;
+  font-size: 37px;
+  height: 50px;
+  line-height: 35px;
+  padding: 15px;
+}
+.nav > li > a {
+  display: block;
+  padding: 10px 15px;
+  position: relative;
+  line-height: 36px;
+  font-size:18px;
+}

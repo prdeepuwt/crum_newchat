@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.atwho
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
@@ -89,6 +90,18 @@ ready = function() {
         }
     }
   });
+
+  $('#user_interests').atwho({
+    at: "",
+    insertTpl: "${name}, ", 
+    callbacks: {
+      remoteFilter: function(query, callback) {
+        $.getJSON("/tags.json", {q: query}, function(data) {
+          callback(data)
+        });
+      }
+    }
+  }); 
 };
 
 $(document).ready(ready);

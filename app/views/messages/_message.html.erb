@@ -1,10 +1,14 @@
-<div class="col-md-12">
-  <img src="<%= message.user.avatar.url(:thumb) %>" />
-  <%= raw simple_format message.body %>
-  <%= message.user.name %>
-  <%= time_ago_in_words(message.created_at) %> ago
-  <%= simple_form_for(Bookmark.new, {:remote =>true}) do |f| %>
-      <%= f.input :message_id, {:label=>false, :as=>'hidden', :input_html=>{:value=>message.id}} %>
-      <%= f.button :submit %>
-  <% end %>
+<div class="row">
+  <div class="col-md-12 chhat">
+    <div class="user-img"><img src="<%= message.user.avatar.url(:thumb) %>" /></div>
+    <div class="chat-section">
+    <p class="user-name"><%= message.user.name %></p>
+    <%= simple_form_for(Bookmark.new, {:remote =>true}) do |f| %>
+        <%= f.input :message_id, {:label=>false, :as=>'hidden', :input_html=>{:value=>message.id}} %>
+        <%= f.button :submit %>
+    <% end %>
+    <p><%= time_ago_in_words(message.created_at) %> ago</p>
+    <div class="message-user"><%= raw simple_format message.body %></div>
+    </div>
+  </div>
 </div>

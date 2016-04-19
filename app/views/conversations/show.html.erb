@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-
+<div class="col-md-3 left">
 <p>
   <strong>Name:</strong>
   <%= @conversation.name %>
@@ -14,16 +14,19 @@
 <%= link_to 'Back', conversations_path %>
 <div class="row">
   <div class="col-md-12">
-    <class="col-md-5">
-      <h1>#Conversations Name</h1>
+      <h3>#Conversations Name</h3>
       <span>Number of member</span>
-    </div>
   </div>
 </div>
-<div class="row" id="conversation_<%= @conversation.id %>">
-  <%= render(@conversation.messages) %>
+
 </div>
-<%= render('messages/form') %>
+<div class="col-md-9 con" id="conversation_<%= @conversation.id %>">
+<%= render(@conversation.messages) %>
+<div>
+</div>
+</div>
+<div class="col-md-9 pull-right footer"><%= render('messages/form') %>
+</div>
 <script>
 socket.on('chat message', function(msg){
   conversation_id = msg.substring(0, 1)
