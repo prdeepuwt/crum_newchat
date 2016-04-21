@@ -13,6 +13,11 @@
 //= require jquery
 //= require jquery.atwho
 //= require jquery_ujs
+//= require moment
+//= require fullcalendar
+//= require fullcalendar/gcal
+//= require bootstrap-modal
+//= require bootstrap-modalmanager
 //= require turbolinks
 //= require_tree .
 
@@ -75,6 +80,32 @@ function checkAnyFormFieldFilledSubmitAndReset(e, jsObj){
 
 
 
+function open_event_modal(event_id){
+
+  var $modal_event = $('#event_modal');
+
+  //create the backdrop and wait for next modal to be triggered
+
+  $('body').modalmanager('loading');
+
+  //user_id = $(this).attr('data')
+
+   
+
+  setTimeout(function(){
+
+    $modal_event.load('/time_tables/' + event_id + '.js', '', function(){
+
+      $modal_event.modal();
+
+    });
+
+  }, 1000);
+
+}
+
+
+
 var ready;
 ready = function() {
   $('.submit_on_enter').keypress(function(event) {
@@ -101,7 +132,31 @@ ready = function() {
         });
       }
     }
-  }); 
+  });
+
+
+
+  $('#event_calendar_full').fullCalendar({
+
+    header: {
+        left: 'prev,next,today',
+        center: 'title',
+        right: 'month,agendaDay,agendaWeek'
+    },
+    events: '/time_tables.json',
+    eventRender: function (event, element) {
+        element.attr('href', 'javascript:void(0);');
+        element.attr('onclick', 'open_event_modal("' + event.id + '");');
+        element.attr('title', 'By: ' + event.user.name + '\n' + event.title + '\n\n' + event.description);
+        $(element).html('<img class="event_user_img" src="'+ event.user.avatar +'" width="30px" height="30px" /> ' + event.user.name + $(element).html())
+    },
+//    title: {
+//      month: 'MMM YY', // September 2009
+//      week: "MMM D YY", // Sep 13 2009
+//      day: 'MMM D YY'  // September 8 2009    
+//    }
+displayEventEnd: true,
+  });
 };
 
 $(document).ready(ready);

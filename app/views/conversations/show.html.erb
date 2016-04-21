@@ -1,31 +1,31 @@
 <p id="notice"><%= notice %></p>
-<div class="col-md-3 left">
-<p>
-  <strong>Name:</strong>
-  <%= @conversation.name %>
+<div class="col-md-2 left">
+  <strong>
+    <%= current_user.name %>
+  </strong>
 </p>
-
+<!--<p>
 <p>
   <strong>Kind:</strong>
-  <%= @conversation.kind %>
+  <%#= @conversation.kind %>
 </p>
-
-<%= link_to 'Edit', edit_conversation_path(@conversation) %> |
-<%= link_to 'Back', conversations_path %>
+<%#= link_to 'Edit', edit_conversation_path(@conversation) %> |
+<%#= link_to 'Back', conversations_path %>--!>
 <div class="row">
   <div class="col-md-12">
-      <h3>#Conversations Name</h3>
-      <span>Number of member</span>
+      <h4>Conversations</h4>
+      <span>#<%= @conversation.name %></span>
   </div>
 </div>
 
 </div>
-<div class="col-md-9 con" id="conversation_<%= @conversation.id %>">
+<div class="col-md-10 con" id="conversation_<%= @conversation.id %>">
 <%= render(@conversation.messages) %>
 <div>
 </div>
+
+<div class="col-md-10 pull-right footer"><%= render('messages/form') %>
 </div>
-<div class="col-md-9 pull-right footer"><%= render('messages/form') %>
 </div>
 <script>
 socket.on('chat message', function(msg){

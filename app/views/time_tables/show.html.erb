@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @time_table.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @time_table.description %>
+</p>
+
+<p>
+  <strong>Start:</strong>
+  <%= @time_table.start %>
+</p>
+
+<p>
+  <strong>End:</strong>
+  <%= @time_table.end %>
+</p>
+
+<p>
+  <strong>Privacy:</strong>
+  <%= @time_table.privacy %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @time_table.user.name %>
+</p>
+
+<%= link_to 'Edit', edit_time_table_path(@time_table) %> |
+<%#= link_to 'Back', time_tables_path %>

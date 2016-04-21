@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160419144727) do
+ActiveRecord::Schema.define(version: 20160421120621) do
 
   create_table "attatchments", force: :cascade do |t|
     t.integer  "message_id"
@@ -64,6 +64,19 @@ ActiveRecord::Schema.define(version: 20160419144727) do
 
   add_index "tags_users", ["tag_id"], name: "index_tags_users_on_tag_id"
   add_index "tags_users", ["user_id"], name: "index_tags_users_on_user_id"
+
+  create_table "time_tables", force: :cascade do |t|
+    t.string   "title"
+    t.string   "description"
+    t.datetime "start"
+    t.datetime "end"
+    t.integer  "privacy"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "time_tables", ["user_id"], name: "index_time_tables_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

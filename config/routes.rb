@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :time_tables
   resources :tags
   resources :messages
   resources :attatchments
