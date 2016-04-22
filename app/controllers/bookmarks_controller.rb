@@ -2,7 +2,7 @@ class BookmarksController < ApplicationController
   before_action :set_bookmark, only: [:destroy]
 
   def create
-    bookmark = Bookmark.where( message_id: params[:message_id], user_id: current_user.id ).first
+    bookmark = Bookmark.where( message_id: params[:bookmark][:message_id], user_id: current_user.id ).first
     if bookmark
       bookmark.destroy
     else

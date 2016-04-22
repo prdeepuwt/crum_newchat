@@ -122,6 +122,18 @@ ready = function() {
     }
   });
 
+  $('#search_tag').atwho({
+    at: "",
+    insertTpl: "${name}", 
+    callbacks: {
+      remoteFilter: function(query, callback) {
+        $.getJSON("/tags.json", {q: query}, function(data) {
+          callback(data)
+        });
+      }
+    }
+  });
+
   $('#user_interests').atwho({
     at: "",
     insertTpl: "${name}, ", 
@@ -157,6 +169,24 @@ ready = function() {
 //    }
 displayEventEnd: true,
   });
+
+  $('#event_calendar_small').fullCalendar({
+
+    header: {
+        left: 'prev,next,today',
+        center: 'title',
+        right: 'month,agendaDay,agendaWeek'
+    },
+    events: '/time_tables.json?user_id=' + $('#event_calendar_small').data('user-id'),
+    eventRender: function (event, element) {
+        element.attr('href', 'javascript:void(0);');
+        element.attr('onclick', 'open_event_modal("' + event.id + '");');
+        element.attr('title', 'By: ' + event.user.name + '\n' + event.title + '\n\n' + event.description);
+        $(element).html('<img class="event_user_img" src="'+ event.user.avatar +'" width="30px" height="30px" /> ' + event.user.name + $(element).html())
+    },
+    displayEventEnd: true,
+  });
+
 };
 
 $(document).ready(ready);

@@ -4,7 +4,12 @@ class TimeTablesController < ApplicationController
   # GET /time_tables
   # GET /time_tables.json
   def index
-    @time_tables = TimeTable.all
+    #@time_tables = TimeTable.all
+    if(params[:user_id])
+      @time_tables = User.find(params[:user_id]).time_tables.where({:privacy=>'open'})
+    else
+      @time_tables = current_user.time_tables
+    end
   end
 
   # GET /time_tables/1
@@ -25,7 +30,7 @@ class TimeTablesController < ApplicationController
   # POST /time_tables.json
   def create
     @time_table = TimeTable.new(time_table_params)
-
+    @time_table.user = current_user
     respond_to do |format|
       if @time_table.save
         format.html { redirect_to @time_table, notice: 'Time table was successfully created.' }

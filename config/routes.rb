@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :after_signup
   resources :bookmarks, only: [:index, :create, :destroy]
   devise_for :users, :controllers => { registrations: 'registrations' }
+  match '/users/:id', :to=> 'users#show' , :as=> :user, :via=> :get 
   root to: "home#index"
   get 'dashboard' => 'home#dashboard'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

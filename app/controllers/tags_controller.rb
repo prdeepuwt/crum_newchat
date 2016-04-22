@@ -4,6 +4,12 @@ class TagsController < ApplicationController
   # GET /tags
   # GET /tags.json
   def index
+    if(params[:search_tag])
+      @tag = Tag.find_by({:name=> params[:search_tag]})
+      if(@tag)
+        redirect_to @tag
+      end
+    end
     @tags = Tag.all
   end
 

@@ -1,0 +1,6 @@
+<div class="col-md-4" data-user-id="<%= @user.id %>" id="event_calendar_small"></div>
+<h1>Name: <%= @user.name %></h1>
+<p>Email: <%= @user.email %>
+<p>Thumb-Photo: <img src="<%= @user.avatar.url(:thumb) %>" />
+<p>Photo: <img src='<%= @user.avatar.url %>' />
+

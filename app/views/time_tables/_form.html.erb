@@ -7,7 +7,6 @@
     <%= f.input :start %>
     <%= f.input :end %>
     <%= f.input :privacy, as: :select, collection: TimeTable.privacies.keys.to_a, :include_blank => false %>
-    <%= f.association :user %>
   </div>
 
   <div class="form-actions">
