@@ -10,11 +10,11 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *=require jquery.atwho
+ *= require jquery.atwho
  *= require fullcalendar
  *= require fullcalendar.print
  *= require bootstrap-modal-bs3patch
- *=require bootstrap-modal
+ *= require bootstrap-modal
  *= require_tree .
  *= require_self
  */
@@ -84,4 +84,3 @@ body{padding:0px;}
 }
 .empty_star{
   color: #00F;
-}
