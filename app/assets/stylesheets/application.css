@@ -17,7 +17,14 @@
  *= require_tree .
  *= require_self
  */
-.left{background:#ccc; height:70px; padding:10px; }
+.left{background:#ccc; height:auto; padding:10px; }
+.ui.header.left.floated.white-text {
+    background: #ccc none repeat scroll 0 0;
+    height: 70px;
+}
+.search_user {
+    color: #000;
+}
 .logo a{
 font-size:30px; font-family:arial; color:#000; font-weight:bold;
 }

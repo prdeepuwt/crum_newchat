@@ -21,14 +21,16 @@
      
       <h4>Direct Messages</h4>
       <% @direct_conversations.each do |conversation| %>
-        <div class="col-md-2"><%= link_to conversation.users.where.not(:id=>current_user.id).first.name, conversation %></div>
+        <div class="col-md-12">
+          <%= link_to conversation.users.where.not(:id=>current_user.id).first.name, conversation %>
+        </div>
       <% end %>
       
   </div>
 </div>
   <form method="get" action="" >
-    <%= text_field_tag :user, '', class: 'search_user', autocomplete: 'off' %>
-    <input type="submit" value="Add" >
+    <%= text_field_tag :user, '', class: 'search_user', autocomplete: 'off', placeholder: 'Add user' %>
+    <input type="submit" value="Add user" style="visibility: hidden;" >
   </form>
 </div>
 <div class="col-md-6">
@@ -37,7 +39,7 @@
 <% if(@conversation.kind == 'channel') %>
   <h4>#<%= @conversation.name %></h4>
   <% else %>
-    <%= @conversation.users.where.not(:id=>current_user.id).first.name %>
+    <h4><%= @conversation.users.where.not(:id=>current_user.id).first.name %></h4>
   <% end %>
 <%= @conversation.users.count() %> members
 
