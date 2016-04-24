@@ -8,10 +8,10 @@
   <% @tag.users.each do |user| %>
     <div class="col-md-3">
       <%= image_tag user.avatar.url(:thumb), class: 'img-thumbnail' %>
-      <%= user.name %>
+      <%= link_to user.name, user %>
     </div>
   <% end %>
 </div>
 
-<%= link_to 'Edit', edit_tag_path(@tag) %> |
+<%#= link_to 'Edit', edit_tag_path(@tag) %> |
 <%= link_to 'Back', tags_path %>

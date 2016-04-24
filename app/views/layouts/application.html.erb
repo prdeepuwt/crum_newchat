@@ -14,18 +14,23 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <div class="col-md-6 pull-right">
-      <ul>
-        <li><%= link_to "Profile", current_user %></li>
-        <li><%= link_to "Time table", time_tables_path %></li>
-        <li><%= link_to "Conversations", conversations_path %></li>
-        <li><%= link_to "Show Bookmarks", bookmarks_path %></li>
-        <li><%= link_to "Tags", tags_path %></li>
-      </ul>
+  <div class='row'>
+    <div class="ui header left floated white-text">
+      <div class='col-md-4'>
+        <div class='logo'><%= link_to 'Crum', root_path %></div>
+      </div>
+      <div class="col-md-8 pull-right">
+        <ul class='nav navbar-nav'>
+          <li><%= link_to "Profile", current_user %></li>
+          <li><%= link_to "My Time table", time_tables_path %></li>
+          <li><%= link_to "Conversations", conversations_path %></li>
+          <li><%= link_to "Show Bookmarks", bookmarks_path %></li>
+          <li><%= link_to "Tags", tags_path %></li>
+        </ul>
+        <span><%= link_to 'Logout', destroy_user_session_path, method: :delete, :class => 'logout' %></span>
+      </div>
     </div>
     <%= yield %>
-
+  </div>
   </body>
 </html>

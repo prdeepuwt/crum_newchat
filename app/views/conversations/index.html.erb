@@ -1,18 +1,17 @@
 <div class="container">
 <h1> Conversations</h1>
-
-
-  <div class="col-md-12">  <% @conversations.each do |conversation| %>
-
-        <div class="col-md-2"><%= link_to conversation.name, conversation %></div>
-       <%#= conversation.kind %>
-       <%#= link_to 'Show', conversation %>
-        <div class="col-md-10 pull-right"><%= link_to edit_conversation_path(conversation) do %>
-           <b class="glyphicon glyphicon-edit"></b>
-        <% end %>
-        </div>
-        <%#= link_to 'Destroy', conversation, method: :delete, data: { confirm: 'Are you sure?' } %>
-    <% end %>
+<div class="col-md-12">
+  <% @conversations.each do |conversation| %>
+    <div class="col-md-2">
+      <%= link_to conversation.name, conversation %>
+    </div>
+    <div class="col-md-10 pull-right">
+      <%= link_to edit_conversation_path(conversation) do %>
+        <b class="glyphicon glyphicon-edit"></b>
+      <% end %>
+     </div>
+     <%#= link_to 'Destroy', conversation, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %>
 </div>
 <br>
 

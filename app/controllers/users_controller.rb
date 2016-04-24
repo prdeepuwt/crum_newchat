@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
+  before_action :authenticate_user!
 
   def index
-    @users = User.where.not(:id=> current_user.id)  
+    @users = User.where.not(:id=> current_user.id) 
+    authorize @users
   end
 
 
@@ -29,6 +31,7 @@ class UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
+      authorize @user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

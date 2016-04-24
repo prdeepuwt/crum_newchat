@@ -12,13 +12,17 @@
  *
  *= require jquery.atwho
  *= require fullcalendar
- *= require fullcalendar.print
  *= require bootstrap-modal-bs3patch
  *= require bootstrap-modal
  *= require_tree .
  *= require_self
  */
-.left{background:#ccc; height:100%; padding:15px; }
+.left{background:#ccc; height:70px; padding:10px; }
+.logo a{
+font-size:30px; font-family:arial; color:#000; font-weight:bold;
+}
+.logout{padding:20px 0px 10px; line-height:50px; font-size:20px; color:#000;}
+
 .user-img {
   border-radius: 31px;
   height: 62px;
@@ -86,3 +90,17 @@ body{padding:0px;}
   color: #00F;
 }
 ul li{display:inline; padding:0px 10px;}
+.empty_star{
+   background-image: url("/images/empty-star.png");
+    background-size: cover;
+    height: 23px;
+    width: 19px !important;
+}
+.star{
+   background-image: url("/images/star-icon.png");
+    background-size: cover;
+    height: 23px;
+    width: 19px !important;
+}
+.row { margin: 0; padding: 0 }
+

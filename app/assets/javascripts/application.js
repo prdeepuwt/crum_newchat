@@ -160,7 +160,7 @@ $(document).on('turbolinks:load', function() {
 
   $('#event_calendar_full').fullCalendar({
 
-    header: {
+    header:{
         left: 'prev,next,today',
         center: 'title',
         right: 'month,agendaDay,agendaWeek'
@@ -172,11 +172,11 @@ $(document).on('turbolinks:load', function() {
         element.attr('title', 'By: ' + event.user.name + '\n' + event.title + '\n\n' + event.description);
         $(element).html('<img class="event_user_img" src="'+ event.user.avatar +'" width="30px" height="30px" /> ' + event.user.name + $(element).html())
     },
-//    title: {
-//      month: 'MMM YY', // September 2009
-//      week: "MMM D YY", // Sep 13 2009
-//      day: 'MMM D YY'  // September 8 2009    
-//    }
+    title: {
+      month: 'MMM YY', // September 2009
+      week: "MMM D YY", // Sep 13 2009
+      day: 'MMM D YY'  // September 8 2009    
+    },
 displayEventEnd: true,
   });
 

@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :messages
   resources :attatchments
   resources :after_signup
-  resources :bookmarks, only: [:index, :create, :destroy]
+  resources :bookmarks, only: [:index, :create]
   devise_for :users, :controllers => { registrations: 'registrations' }
   match '/users/:id', :to=> 'users#show' , :as=> :user, :via=> :get 
   match '/users', :to=> 'users#index', :as=> :users, :via=> :get 

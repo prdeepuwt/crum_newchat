@@ -1,10 +1,11 @@
 class TimeTablesController < ApplicationController
   before_action :set_time_table, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /time_tables
   # GET /time_tables.json
   def index
-    #@time_tables = TimeTable.all
+    authorize TimeTable
     if(params[:user_id])
       @time_tables = User.find(params[:user_id]).time_tables.where({:privacy=>'open'})
     else
@@ -20,6 +21,7 @@ class TimeTablesController < ApplicationController
   # GET /time_tables/new
   def new
     @time_table = TimeTable.new
+    authorize @time_table
   end
 
   # GET /time_tables/1/edit
@@ -31,6 +33,7 @@ class TimeTablesController < ApplicationController
   def create
     @time_table = TimeTable.new(time_table_params)
     @time_table.user = current_user
+    authorize @time_table
     respond_to do |format|
       if @time_table.save
         format.html { redirect_to @time_table, notice: 'Time table was successfully created.' }
@@ -70,6 +73,7 @@ class TimeTablesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_time_table
       @time_table = TimeTable.find(params[:id])
+      authorize @time_table
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

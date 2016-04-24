@@ -1,9 +1,11 @@
 class TagsController < ApplicationController
   before_action :set_tag, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /tags
   # GET /tags.json
   def index
+    authorize Tag
     if(params[:search_tag])
       @tag = Tag.find_by({:name=> params[:search_tag].strip})
       if(@tag)
@@ -21,6 +23,7 @@ class TagsController < ApplicationController
   # GET /tags/new
   def new
     @tag = Tag.new
+    authorize @tag
   end
 
   # GET /tags/1/edit
@@ -31,7 +34,7 @@ class TagsController < ApplicationController
   # POST /tags.json
   def create
     @tag = Tag.new(tag_params)
-
+    authorize @tag
     respond_to do |format|
       if @tag.save
         format.html { redirect_to @tag, notice: 'Tag was successfully created.' }
@@ -60,9 +63,9 @@ class TagsController < ApplicationController
   # DELETE /tags/1
   # DELETE /tags/1.json
   def destroy
-    @tag.destroy
+    tag.users.delete(current_user)
     respond_to do |format|
-      format.html { redirect_to tags_url, notice: 'Tag was successfully destroyed.' }
+      format.html { redirect_to current_user, notice: 'Tag was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -71,6 +74,7 @@ class TagsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_tag
       @tag = Tag.find(params[:id])
+      authorize @tag
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

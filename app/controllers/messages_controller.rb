@@ -1,31 +1,11 @@
 class MessagesController < ApplicationController
-  before_action :set_message, only: [:show, :edit, :update, :destroy]
+  before_action :set_message, only: [:update, :destroy]
+  before_action :authenticate_user!
 
-  # GET /posts
-  # GET /posts.json
-  def index
-    @messages = Message.all
-  end
-
-  # GET /posts/1
-  # GET /posts/1.json
-  def show
-  end
-
-  # GET /posts/new
-  def new
-    @message = Message.new
-  end
-
-  # GET /posts/1/edit
-  def edit
-  end
-
-  # POST /posts
-  # POST /posts.json
   def create
     @message = Message.new(message_params)
     @message.user=current_user
+    authorize @message
     respond_to do |format|
       if @message.save
         format.html { redirect_to @message, notice: 'Message was successfully created.' }
@@ -39,8 +19,6 @@ class MessagesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /posts/1
-  # PATCH/PUT /posts/1.json
   def update
     respond_to do |format|
       if @message.update(message_params)
@@ -53,8 +31,6 @@ class MessagesController < ApplicationController
     end
   end
 
-  # DELETE /posts/1
-  # DELETE /posts/1.json
   def destroy
     @message.destroy
     respond_to do |format|
@@ -67,6 +43,7 @@ class MessagesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_message
       @message = Message.find(params[:id])
+      authorize @message
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

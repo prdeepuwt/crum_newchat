@@ -1,10 +1,11 @@
 class ConversationsController < ApplicationController
   before_action :set_conversation, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /channels
   # GET /channels.json
   def index
-    @conversations = current_user.conversations
+    @conversations = current_user.conversations.where(:kind=> 'channel')
   end
 
   # GET /channels/1
