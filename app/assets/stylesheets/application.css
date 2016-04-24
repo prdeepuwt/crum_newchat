@@ -85,3 +85,4 @@ body{padding:0px;}
 .empty_star{
   color: #00F;
 }
+ul li{display:inline; padding:0px 10px;}

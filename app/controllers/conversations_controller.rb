@@ -4,13 +4,46 @@ class ConversationsController < ApplicationController
   # GET /channels
   # GET /channels.json
   def index
-    @conversations = Conversation.all
+    @conversations = current_user.conversations
   end
 
   # GET /channels/1
   # GET /channels/1.json
   def show
+    @conversations = current_user.conversations.where(:kind=> 'channel')
+    @direct_conversations = current_user.conversations.where(:kind=> 'direct')
     @message = Message.new
+    if(params[:search_user])
+      @emails= process_tags(params[:search_user])
+      @emails.each do |email|
+        user= User.find_by(:email=>email)
+        if user && user != current_user
+          @conversation.users << user unless @conversation.users.include?(user)
+        end
+      end
+    end
+
+    if(params[:user])
+      emails= process_tags(params[:user])
+      emails.each do |email|
+        user= User.find_by(:email=>email)
+        if user && user != current_user
+          conversations = current_user.conversations.includes(:users).where(users: {id: user.id}, kind: 'direct')
+          if conversations.any?
+            @direct_message= conversations.first
+          else
+            @direct_message= Conversation.new(:name=> 'direct', :kind=> 'direct')
+            @direct_message.save
+            @direct_message.users << user
+            @direct_message.users << current_user
+          end
+        end
+      end
+      if(defined?(@direct_message))
+        redirect_to(@direct_message)
+      end
+    end
+
   end
 
   # GET /channels/new
@@ -26,8 +59,9 @@ class ConversationsController < ApplicationController
   # POST /channels.json
   def create
     @conversation = Conversation.new(conversation_params)
-
+    @conversation.users << current_user
     respond_to do |format|
+      @conversation.kind = 'channel'
       if @conversation.save
         format.html { redirect_to @conversation, notice: 'Conversation was successfully created.' }
         format.json { render :show, status: :created, location: @conversation }

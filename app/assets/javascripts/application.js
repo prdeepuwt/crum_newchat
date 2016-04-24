@@ -105,9 +105,7 @@ function open_event_modal(event_id){
 }
 
 
-
-var ready;
-ready = function() {
+$(document).on('turbolinks:load', function() {
   $('.submit_on_enter').keypress(function(event) {
     if (event.keyCode == 13) {
         var content = this.value;
@@ -128,6 +126,18 @@ ready = function() {
     callbacks: {
       remoteFilter: function(query, callback) {
         $.getJSON("/tags.json", {q: query}, function(data) {
+          callback(data)
+        });
+      }
+    }
+  });
+
+    $('.search_user').atwho({
+    at: "",
+    insertTpl: "${email},", 
+    callbacks: {
+      remoteFilter: function(query, callback) {
+        $.getJSON("/users.json", {q: query}, function(data) {
           callback(data)
         });
       }
@@ -187,10 +197,5 @@ displayEventEnd: true,
     displayEventEnd: true,
   });
 
-};
-
-$(document).ready(ready);
-
-$(document).on('page:load', ready);
-
+});
 

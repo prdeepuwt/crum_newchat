@@ -9,5 +9,6 @@ class User < ApplicationRecord
   has_and_belongs_to_many :tags
   has_many :time_tables
   has_many :bookmarks
+  has_and_belongs_to_many :conversations
   mount_uploader :avatar, AvatarUploader
 end

@@ -7,7 +7,7 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
-    <script src="https://radiant-depths-62387.herokuapp.com/socket.io/socket.io.js"></script>
+    <%#= <script src="https://radiant-depths-62387.herokuapp.com/socket.io/socket.io.js"></script> %>
     <script>
       //var socket = io.connect('https://radiant-depths-62387.herokuapp.com/');
     </script>
@@ -16,7 +16,15 @@
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <li><%= link_to "Profile", current_user %>
+    <div class="col-md-6 pull-right">
+      <ul>
+        <li><%= link_to "Profile", current_user %></li>
+        <li><%= link_to "Time table", time_tables_path %></li>
+        <li><%= link_to "Conversations", conversations_path %></li>
+        <li><%= link_to "Show Bookmarks", bookmarks_path %></li>
+        <li><%= link_to "Tags", tags_path %></li>
+      </ul>
+    </div>
     <%= yield %>
 
   </body>
