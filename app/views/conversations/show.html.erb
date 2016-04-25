@@ -61,13 +61,16 @@
 
 <div class="col-md-10 pull-right footer"><%= render('messages/form') %>
 </div>
+<button onclick="notifyMe()">
+  Notify me!
+</button>
 </div>
 <script>
-/*
 socket.on('chat message', function(msg){
   conversation_id = msg.substring(0, 1)
   message = msg.substring(2, msg.length)
   $('#conversation_' + conversation_id).append(message)
+  notifyMe()
 });
-*/
+
 </script>

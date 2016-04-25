@@ -104,7 +104,27 @@ function open_event_modal(event_id){
   }, 1000);
 
 }
+function notifyMe() {
+  if (!Notification) {
+    alert('Desktop notifications not available in your browser. Try Chromium.'); 
+    return;
+  }
 
+  if (Notification.permission !== "granted")
+    Notification.requestPermission();
+  else {
+    var notification = new Notification('Notification title', {
+      icon: 'http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png',
+      body: "Hey there! You've been notified!",
+    });
+
+    notification.onclick = function () {
+      window.open("http://stackoverflow.com/a/13328397/1269037");      
+    };
+    
+  }
+
+}
 
 $(document).on('turbolinks:load', function() {
   $('.submit_on_enter').keypress(function(event) {
@@ -133,7 +153,7 @@ $(document).on('turbolinks:load', function() {
     }
   });
 
-    $('.search_user').atwho({
+  $('.search_user').atwho({
     at: "",
     insertTpl: "${email},", 
     callbacks: {
@@ -157,8 +177,12 @@ $(document).on('turbolinks:load', function() {
     }
   });
 
-    
-    });
+  document.addEventListener('DOMContentLoaded', function () {
+    if (Notification.permission !== "granted")
+      Notification.requestPermission();
+  });
+
+
 
   $('#event_calendar_full').fullCalendar({
 
