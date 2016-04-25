@@ -63,7 +63,7 @@ class TagsController < ApplicationController
   # DELETE /tags/1
   # DELETE /tags/1.json
   def destroy
-    tag.users.delete(current_user)
+    @tag.users.delete(current_user)
     respond_to do |format|
       format.html { redirect_to current_user, notice: 'Tag was successfully destroyed.' }
       format.json { head :no_content }

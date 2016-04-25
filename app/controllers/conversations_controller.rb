@@ -61,6 +61,7 @@ class ConversationsController < ApplicationController
   def create
     @conversation = Conversation.new(conversation_params)
     @conversation.users << current_user
+    @conversation.user = current_user
     respond_to do |format|
       @conversation.kind = 'channel'
       if @conversation.save

@@ -16,6 +16,7 @@
 //= require moment
 //= require fullcalendar
 //= require fullcalendar/gcal
+//= require jquery-fileupload
 //= require bootstrap-modal
 //= require bootstrap-modalmanager
 //= require turbolinks
@@ -156,7 +157,8 @@ $(document).on('turbolinks:load', function() {
     }
   });
 
-
+    
+    });
 
   $('#event_calendar_full').fullCalendar({
 

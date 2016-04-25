@@ -2,7 +2,15 @@
 <h1>Name: <%= @user.name %></h1>
 <p>Email: <%= @user.email %>
 <p>Tags: <% @user.tags.each do |tag| %>
-  <%= tag.name %> 
+  <%= tag.name %>
+    <% if policy(tag).destroy? %>
+      <%= link_to tag, method: :delete, data: { confirm: 'Are you sure?'}, class: "btn btn-default" do %>
+      <i class="glyphicon glyphicon-remove"></i>
+    <% end %>
+<% end %>
+  
+  
+  <%#= link_to <span class="glyphicon glyphicon-remove"></span> %>
 <% end %>
 <p>Thumb-Photo: <img src="<%= @user.avatar.url(:thumb) %>" />
 <p>Photo: <img src='<%= @user.avatar.url %>' />

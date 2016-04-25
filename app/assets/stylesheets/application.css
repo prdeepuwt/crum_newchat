@@ -12,6 +12,8 @@
  *
  *= require jquery.atwho
  *= require fullcalendar
+ *= require jquery.fileupload
+ *= require jquery.fileupload-ui
  *= require bootstrap-modal-bs3patch
  *= require bootstrap-modal
  *= require_tree .
@@ -25,6 +27,11 @@
 .search_user {
     color: #000;
 }
+.bar {
+    height: 18px;
+    background: green;
+}
+.add{margin:10px auto;}
 .logo a{
 font-size:30px; font-family:arial; color:#000; font-weight:bold;
 }
