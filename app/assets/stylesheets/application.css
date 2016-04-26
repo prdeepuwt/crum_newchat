@@ -76,7 +76,7 @@ font-size:30px; font-family:arial; color:#000; font-weight:bold;
   float: left;
 }
 .col-md-10.con {
-  height: 530px;
+  height: 440px;
   overflow-x: hidden;
   overflow-y: auto;
 }

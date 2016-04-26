@@ -119,7 +119,7 @@ function notifyMe() {
     });
 
     notification.onclick = function () {
-      window.open("http://stackoverflow.com/a/13328397/1269037");      
+      window.location.href("http://stackoverflow.com/a/13328397/1269037");      
     };
     
   }

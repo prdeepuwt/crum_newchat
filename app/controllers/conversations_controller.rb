@@ -33,7 +33,8 @@ class ConversationsController < ApplicationController
           if conversations.any?
             @direct_message= conversations.first
           else
-            @direct_message= Conversation.new(:name=> 'direct', :kind=> 'direct')
+            @direct_message = Conversation.new(:name=> 'direct', :kind=> 'direct')
+            @direct_message.user = current_user
             @direct_message.save
             @direct_message.users << user
             @direct_message.users << current_user
