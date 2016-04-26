@@ -7,9 +7,9 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
-    <script src="https://radiant-depths-62387.herokuapp.com/socket.io/socket.io.js"></script>
+    <script src="#{ENV[CHAT_SERVER]}/socket.io/socket.io.js"></script>
     <script>
-      var socket = io.connect('https://radiant-depths-62387.herokuapp.com/');
+      var socket = io.connect(ENV['CHAT_SERVER']);
     </script>
   </head>
 
@@ -32,5 +32,33 @@
     </div>
     <%= yield %>
   </div>
+  <% if user_signed_in? %>
+    <script>
+      <% if controller_name == 'conversations' and action_name == 'show' %>
+        var d = $('#conversation_<%= @conversation.id %>')
+        d.scrollTop(d.prop("scrollHeight"));
+      <% end %>
+      socket.on('connect', function() {
+         // Connected, let's sign-up for to receive messages for this room
+         console.log('connect')
+         <% current_user.conversations.each do |conversation| %>
+          socket.emit('room', <%= conversation.id %>);
+         <% end %>
+      });
+      socket.on('message', function(msg){
+        console.log('got')
+        appended = false;
+        <% if controller_name == 'conversations' and action_name == 'show' %>
+          if(<%= @conversation.id %> == msg.conversation){
+            d.append(msg.message).scrollTop(d.prop("scrollHeight"));
+            appended = true;
+          }
+        <% end %>
+        if((msg.sender_user != <%= current_user.id %>) && !appended){
+          notifyMe()
+        }
+      });
+    </script>
+  <% end %>
   </body>
 </html>

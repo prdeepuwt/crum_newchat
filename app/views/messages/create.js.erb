@@ -1,1 +1,1 @@
-socket.emit('chat message', '<%= @message.conversation.id %>_<%= escape_javascript(render(@message)) %>');
+socket.emit('message', { conversation: <%= @message.conversation.id %>, sender_user: <%= current_user.id %>, message: '<%= escape_javascript(render(@message)) %>'});
