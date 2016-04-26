@@ -65,3 +65,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'rails_layout'
 gem 'bootstrap-generators', '~> 3.3.4'
+gem "figaro"
