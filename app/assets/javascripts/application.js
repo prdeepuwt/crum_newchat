@@ -103,7 +103,7 @@ function open_event_modal(event_id){
   }, 1000);
 
 }
-function notifyMe(title = '', msg) {
+function notifyMe(title, msg) {
   if (!Notification) {
     alert('Desktop notifications not available in your browser. Try Chromium.'); 
     return;
