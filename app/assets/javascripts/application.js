@@ -118,7 +118,8 @@ function notifyMe(title = '', msg) {
     });
 
     notification.onclick = function () {
-      window.open(msg.link).focus();      
+      var a = window.open(msg.link, "crumchat");
+      a.focus();
     };
     
   }
