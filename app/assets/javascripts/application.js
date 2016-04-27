@@ -19,7 +19,6 @@
 //= require jquery-fileupload
 //= require bootstrap-modal
 //= require bootstrap-modalmanager
-//= require turbolinks
 //= require_tree .
 
 
@@ -104,7 +103,7 @@ function open_event_modal(event_id){
   }, 1000);
 
 }
-function notifyMe() {
+function notifyMe(title = '', msg) {
   if (!Notification) {
     alert('Desktop notifications not available in your browser. Try Chromium.'); 
     return;
@@ -113,20 +112,20 @@ function notifyMe() {
   if (Notification.permission !== "granted")
     Notification.requestPermission();
   else {
-    var notification = new Notification('Notification title', {
-      icon: 'http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png',
-      body: "Hey there! You've been notified!",
+    var notification = new Notification('New message from ' + msg.sender_user_name + ' ' + title, {
+      icon: 'http://xpirits.com/images/q-logo.png',
+      body: msg.body,
     });
 
     notification.onclick = function () {
-      window.location.href("http://stackoverflow.com/a/13328397/1269037");      
+      window.open(msg.link).focus();      
     };
     
   }
 
 }
 
-$(document).on('turbolinks:load', function() {
+$(document).ready( function() {
   $('.submit_on_enter').keypress(function(event) {
     if (event.keyCode == 13) {
         var content = this.value;

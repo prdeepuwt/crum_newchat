@@ -5,12 +5,9 @@
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
-    <script src="https://radiant-depths-62387.herokuapp.com/socket.io/socket.io.js"></script>
-    <script>
-      var socket = io.connect('https://radiant-depths-62387.herokuapp.com/');
-    </script>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <%= render 'layouts/chat' %>
   </head>
 
   <body>

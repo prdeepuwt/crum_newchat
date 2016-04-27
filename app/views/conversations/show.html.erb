@@ -1,75 +1,52 @@
 <div class="col-md-2 left">
-
   <strong>
     <%= current_user.name %>
   </strong>
-</p>
-<!--<p>
-<p>
-  <strong>Kind:</strong>
-  <%#= @conversation.kind %>
-</p>
-<%#= link_to 'Edit', edit_conversation_path(@conversation) %> |
-<%#= link_to 'Back', conversations_path %>--!>
-<div class="row">
-  <div class="col-md-12">
+  <div class="row">
+    <div class="col-md-12">
       <h4>Conversations<span style="font-size:12px;">(<%= @conversations.count() %>)</span><h4>
       <% @conversations.each do |conversation| %>
         <div class="col-md-12"><p><%= link_to conversation.name, conversation %></p></div>
       <% end %>
-     
+       
       <h4>Direct Messages</h4>
       <% @direct_conversations.each do |conversation| %>
         <div class="col-md-12">
           <%= link_to conversation.users.where.not(:id=>current_user.id).first.name, conversation %>
         </div>
       <% end %>
-      
+    </div>
   </div>
-</div>
   <form method="get" action="" >
     <%= text_field_tag :user, '', class: 'search_user', autocomplete: 'off', placeholder: 'Add user' %>
     <input type="submit" value="Add private user" >
   </form>
 </div>
-<div class="col-md-6">
-<div class="col-md-4">
+<div class="col-md-10">
+  <div class="col-md-12">
+    <div class="col-md-4">
+      <% if(@conversation.kind == 'channel') %>
+        <h4>#<%= @conversation.name %></h4>
+      <% else %>
+        <h4><%= @conversation.users.where.not(:id=>current_user.id).first.name %></h4>
+      <% end %>
+      <%= @conversation.users.count() %> members
+    </div>
+    <div class="col-md-8">
+      <% if(@conversation.kind == 'channel') %>
+        <form method="get" action="" >
+          <%= text_field_tag :search_user, '', class: 'search_user', autocomplete: 'off' %>
+          <input type="submit" value="Add conversation member" >
+        </form>
+      <% end %>
+    </div>
+  </div>
 
-<% if(@conversation.kind == 'channel') %>
-  <h4>#<%= @conversation.name %></h4>
-  <% else %>
-    <h4><%= @conversation.users.where.not(:id=>current_user.id).first.name %></h4>
-  <% end %>
-<%= @conversation.users.count() %> members
+  <div class="col-md-12 con" id="conversation_<%= @conversation.id %>">
+    <%= render(@conversation.messages) %>
+  </div>
 
-
+  <div class="col-md-12 pull-right footer">
+    <%= render('messages/form') %>
+  </div>
 </div>
-<div class="col-md-8">
-<% if(@conversation.kind == 'channel') %>
-  <form method="get" action="" >
-    <%= text_field_tag :search_user, '', class: 'search_user', autocomplete: 'off' %>
-    <input type="submit" value="Add conversation member" >
-  </form>
-  <% end %>
-</div>
-</div>
-<div class="col-md-10 con" id="conversation_<%= @conversation.id %>">
-<%= render(@conversation.messages) %>
-<div>
-</div>
-
-<div class="col-md-10 pull-right footer"><%= render('messages/form') %>
-</div>
-<button onclick="notifyMe()">
-  Notify me!
-</button>
-</div>
-<script>
-socket.on('chat message', function(msg){
-  conversation_id = msg.substring(0, 1)
-  message = msg.substring(2, msg.length)
-  $('#conversation_' + conversation_id).append(message)
-  notifyMe()
-});
-
-</script>
