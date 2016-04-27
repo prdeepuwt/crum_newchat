@@ -1,0 +1,47 @@
+<script src="<%= ENV['CHAT_SERVER'] %>/socket.io/socket.io.js"></script>
+<script>
+  var socket = io.connect('<%= ENV['CHAT_SERVER'] %>');
+</script>
+
+<% if user_signed_in? %>
+  <script >
+    console.log('start')
+    <% if controller_name == 'conversations' and action_name == 'show' %>
+      
+      console.log('#conversation_<%= @conversation.id %>')
+      $(document).ready(function(){
+        d = $('#conversation_<%= @conversation.id %>')
+        d.scrollTop(d.prop("scrollHeight"));
+      });
+      
+    <% end %>
+    socket.on('connect', function() {
+       // Connected, let's sign-up for to receive messages for this room
+       console.log('connect')
+       <% current_user.conversations.each do |conversation| %>
+        socket.emit('room', <%= conversation.id %>);
+       <% end %>
+    });
+    socket.on('message', function(msg){
+      console.log('got')
+      appended = false;
+      <% if controller_name == 'conversations' and action_name == 'show' %>
+        if(<%= @conversation.id %> == msg.conversation_id){
+          $(document).ready(function(){
+            d.append(msg.message).scrollTop(d.prop("scrollHeight"));
+            appended = true;
+          });
+        }
+      <% end %>
+      if((msg.sender_user_id != <%= current_user.id %>) && !appended){
+        if(msg.conversation_kind == 'channel'){
+          title = "in " + msg.conversation_name
+        }else{
+          title = ''
+        }
+        
+        notifyMe(title, msg)
+      }
+    });
+  </script>
+<% end %>
