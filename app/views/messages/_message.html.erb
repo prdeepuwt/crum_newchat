@@ -2,13 +2,16 @@
   <div class="col-md-12 chhat">
     <div class="user-img"><img src="<%= message.user.avatar.url(:thumb) %>" /></div>
     <div class="chat-section">
-    <p class="user-name"><%= message.user.name %></p>
-    <%= simple_form_for(Bookmark.new, {:remote =>true}) do |f| %>
-        <%= f.input :message_id, {:label=>false, :as=>'hidden', :input_html=>{:value=>message.id}} %>
-        <%= f.button :submit, :id=>"bookmark_#{message.id}", value: '', class: (message.users.include?(current_user)) ? 'star' : 'empty_star' %>
-    <% end %>
-    <p><%= time_ago_in_words(message.created_at) %> ago</p>
-    <div class="message-user"><%= raw simple_format message.body %></div>
+      <p class="user-name"><%= message.user.name %></p>
+      <%= simple_form_for(Bookmark.new, {:remote =>true}) do |f| %>
+          <%= f.input :message_id, {:label=>false, :as=>'hidden', :input_html=>{:value=>message.id}} %>
+          <%= f.button :submit, :id=>"bookmark_#{message.id}", value: '', class: (message.users.include?(current_user)) ? 'star' : 'empty_star' %>
+      <% end %>
+      <p><%= time_ago_in_words(message.created_at) %> ago</p>
+      <div class="message-user"><%= raw simple_format message.body %></div>
+      <% message.attatchments.each do |attatchment| %>
+        <%= image_tag attatchment.file.url, class: 'img-thumbnail' %>
+      <% end %>
     </div>
   </div>
 </div>

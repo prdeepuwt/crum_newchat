@@ -16,42 +16,28 @@
 //= require moment
 //= require fullcalendar
 //= require fullcalendar/gcal
-//= require jquery-fileupload
+//= require jquery-fileupload/basic
 //= require bootstrap-modal
 //= require bootstrap-modalmanager
 //= require_tree .
 
 
 function getCaret(el) {
-
     if (el.selectionStart) {
-
         return el.selectionStart;
-
     } else if (document.selection) {
-
         el.focus();
-
         var r = document.selection.createRange();
-
         if (r == null) {
-
             return 0;
-
         }
 
         var re = el.createTextRange(), rc = re.duplicate();
-
         re.moveToBookmark(r.getBookmark());
-
         rc.setEndPoint('EndToStart', re);
-
         return rc.text.length;
-
     }
-
     return 0;
-
 }
 
 
@@ -81,28 +67,16 @@ function checkAnyFormFieldFilledSubmitAndReset(e, jsObj){
 
 
 function open_event_modal(event_id){
-
   var $modal_event = $('#event_modal');
-
   //create the backdrop and wait for next modal to be triggered
-
   $('body').modalmanager('loading');
-
-  //user_id = $(this).attr('data')
-
-   
-
   setTimeout(function(){
-
     $modal_event.load('/time_tables/' + event_id + '.js', '', function(){
-
       $modal_event.modal();
-
     });
-
   }, 1000);
-
 }
+
 function notifyMe(title, msg) {
   if (!Notification) {
     alert('Desktop notifications not available in your browser. Try Chromium.'); 
@@ -223,5 +197,72 @@ displayEventEnd: true,
     displayEventEnd: true,
   });
 
+  $('#message_attatchments_attributes_0_file').fileupload({
+      dataType: 'json',
+      add: function (e, data) {
+          
+          data.context = $('<p/>').text('Uploading...').appendTo(document.body);
+          data.submit();
+      },
+      progressall: function (e, data) {
+          var progress = parseInt(data.loaded / data.total * 100, 10);
+          $('#progress .bar').css(
+              'width',
+              progress + '%'
+          );
+      },
+      done: function (e, data) {
+          console.log('ff')
+          console.log(data._response.result.message)
+          socket.emit('message', { conversation_id: data._response.result.conversation_id, conversation_name: 'hhh', conversation_kind: 'direct', sender_user_id: 1, sender_user_name: 'vvv', message: data._response.result.message, link: '/', body: 'jjjjjjj'});
+          //$.each(data.result.files, function (index, file) {
+          //    $('<p/>').text(file.name).appendTo(document.body);
+          //});
+          //data.context.text('Upload finished.');
+      },
+  });
+  
+  
+  $('#attatchment_file').fileupload({
+      dataType: 'json',
+      add: function (e, data) {
+          
+          data.context = $('<p/>').text('Uploading...').appendTo(document.body);
+          data.submit();
+      },
+      progressall: function (e, data) {
+          var progress = parseInt(data.loaded / data.total * 100, 10);
+          $('#progress .bar').css(
+              'width',
+              progress + '%'
+          );
+      },
+      done: function (e, data) {
+          console.log(data)
+          //$.each(data.result.files, function (index, file) {
+          //    $('<p/>').text(file.name).appendTo(document.body);
+          //});
+          //data.context.text('Upload finished.');
+      },
+  });
+  
+  
+      $('#attatchment_file1').fileupload({
+        dataType: 'json',
+        add: function (e, data) {
+            data.context = $('<button/>').text('Upload')
+                .appendTo(document.body)
+                   {
+                    data.context = $('<p/>').text('Uploading...').replaceAll($(this));
+                    data.submit();
+                };
+        },
+        done: function (e, data) {
+            data.context.text('Upload finished.');
+        }
+    });
+  
+  
+  
+  
 });
-
