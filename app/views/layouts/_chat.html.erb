@@ -1,6 +1,7 @@
 <script src="<%= ENV['CHAT_SERVER'] %>/socket.io/socket.io.js"></script>
 <script>
   var socket = io.connect('<%= ENV['CHAT_SERVER'] %>');
+  window.name = "crumchat"
 </script>
 
 <% if user_signed_in? %>

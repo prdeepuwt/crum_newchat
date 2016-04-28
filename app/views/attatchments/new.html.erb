@@ -1,4 +1,3 @@
-
 <%= simple_form_for(@attatchment) do |f| %>
   <% if @attatchment.errors.any? %>
     <div id="error_explanation">
@@ -13,14 +12,13 @@
     <%= f.association :message, collection: Message.all, label_method: :body, value_method: :id, include_blank: false %>
   </div>
   <div class="field">
-    <%= f.input :file, autofocus: true, required: true, unique: true %>
+    <%= f.input :file, :input_html=>{multiple: true, data: {url: '/attatchments'}} %>
+    <div id="progress">
+        <div class="bar" style="width: 0%;"></div>
+    </div>
   </div>
   <div class="actions">
     <%= f.submit "Add file" %>
   </div>
-  <div id="progress">
-    <div class="bar" style="width: 0%;"></div>
-</div>
 <% end %>
 <%= render('shared/error_messages', {:object=>@attatchment}) %>
-

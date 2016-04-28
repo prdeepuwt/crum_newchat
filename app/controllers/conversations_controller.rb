@@ -14,6 +14,7 @@ class ConversationsController < ApplicationController
     @conversations = current_user.conversations.where(:kind=> 'channel')
     @direct_conversations = current_user.conversations.where(:kind=> 'direct')
     @message = Message.new
+    @message.attatchments.build
     if(params[:search_user])
       @emails= process_tags(params[:search_user])
       @emails.each do |email|
@@ -45,7 +46,6 @@ class ConversationsController < ApplicationController
         redirect_to(@direct_message)
       end
     end
-
   end
 
   # GET /channels/new

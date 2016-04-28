@@ -3,13 +3,20 @@ class MessagesController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    @message = Message.new(message_params)
-    @message.user=current_user
+    @message = Message.new
+    @message.body = params[:message][:body]
+    @message.conversation_id = params[:message][:conversation_id]
+    @message.user= current_user
     authorize @message
     respond_to do |format|
       if @message.save
-        format.html { redirect_to @message, notice: 'Message was successfully created.' }
-        format.json { render :show, status: :created, location: @message }
+        if params[:message][:attatchments_attributes]
+          params[:message][:attatchments_attributes].each do |attatchment|
+            Attatchment.create!(file: attatchment[:file], message: @message) unless attatchment[:file].blank?
+          end
+        end
+
+        format.json {}
         format.js {}
       else
         format.html { render :new }
@@ -48,6 +55,7 @@ class MessagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
-      params.require(:message).permit(:body, :conversation_id)
+      params.require(:message).permit!
+      #params.require(:message).permit(:body, :conversation_id, attatchments_attributes: [:file])
     end
 end
