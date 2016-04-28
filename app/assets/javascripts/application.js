@@ -201,7 +201,7 @@ displayEventEnd: true,
       dataType: 'json',
       add: function (e, data) {
           
-          data.context = $('<p/>').text('Uploading...').appendTo(document.body);
+          //data.context = $('<p/>').text('').appendTo(document.body);
           data.submit();
       },
       progressall: function (e, data) {
@@ -212,57 +212,12 @@ displayEventEnd: true,
           );
       },
       done: function (e, data) {
-          console.log('ff')
-          console.log(data._response.result.message)
-          socket.emit('message', { conversation_id: data._response.result.conversation_id, conversation_name: 'hhh', conversation_kind: 'direct', sender_user_id: 1, sender_user_name: 'vvv', message: data._response.result.message, link: '/', body: 'jjjjjjj'});
+          socket.emit('message', { conversation_id: data._response.result.conversation_id, conversation_name: data._response.result.conversation_name, conversation_kind: data._response.result.conversation_kind, sender_user_id: data._response.result.sender_user_id, sender_user_name: data._response.result.sender_user_name, message: data._response.result.message, link: data._response.result.link, body: data._response.result.body});
           //$.each(data.result.files, function (index, file) {
           //    $('<p/>').text(file.name).appendTo(document.body);
           //});
           //data.context.text('Upload finished.');
       },
   });
-  
-  
-  $('#attatchment_file').fileupload({
-      dataType: 'json',
-      add: function (e, data) {
-          
-          data.context = $('<p/>').text('Uploading...').appendTo(document.body);
-          data.submit();
-      },
-      progressall: function (e, data) {
-          var progress = parseInt(data.loaded / data.total * 100, 10);
-          $('#progress .bar').css(
-              'width',
-              progress + '%'
-          );
-      },
-      done: function (e, data) {
-          console.log(data)
-          //$.each(data.result.files, function (index, file) {
-          //    $('<p/>').text(file.name).appendTo(document.body);
-          //});
-          //data.context.text('Upload finished.');
-      },
-  });
-  
-  
-      $('#attatchment_file1').fileupload({
-        dataType: 'json',
-        add: function (e, data) {
-            data.context = $('<button/>').text('Upload')
-                .appendTo(document.body)
-                   {
-                    data.context = $('<p/>').text('Uploading...').replaceAll($(this));
-                    data.submit();
-                };
-        },
-        done: function (e, data) {
-            data.context.text('Upload finished.');
-        }
-    });
-  
-  
-  
   
 });

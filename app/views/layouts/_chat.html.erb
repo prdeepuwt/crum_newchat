@@ -6,7 +6,6 @@
 
 <% if user_signed_in? %>
   <script >
-    console.log('start')
     <% if controller_name == 'conversations' and action_name == 'show' %>
       
       console.log('#conversation_<%= @conversation.id %>')
@@ -18,13 +17,11 @@
     <% end %>
     socket.on('connect', function() {
        // Connected, let's sign-up for to receive messages for this room
-       console.log('connect')
        <% current_user.conversations.each do |conversation| %>
         socket.emit('room', <%= conversation.id %>);
        <% end %>
     });
     socket.on('message', function(msg){
-      console.log('got')
       appended = false;
       <% if controller_name == 'conversations' and action_name == 'show' %>
         if(<%= @conversation.id %> == msg.conversation_id){
