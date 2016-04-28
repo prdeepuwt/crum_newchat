@@ -10,7 +10,13 @@
       <p><%= time_ago_in_words(message.created_at) %> ago</p>
       <div class="message-user"><%= raw simple_format message.body %></div>
       <% message.attatchments.each do |attatchment| %>
-        <%= image_tag attatchment.file.url, class: 'img-thumbnail' %>
+        <div class="col-md-2">
+          <% if ['jpg', 'jpeg', 'png', 'gif'].include?(attatchment.file.file.extension) %>
+            <%= image_tag attatchment.file.url, class: 'img-thumbnail' %>
+          <% else %>
+            <%= link_to  File.basename(attatchment.file.path), attatchment.file.url, class: 'file_download_link' %>
+          <% end %>
+        </div>
       <% end %>
     </div>
   </div>
