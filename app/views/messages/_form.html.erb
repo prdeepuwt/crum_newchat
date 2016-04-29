@@ -5,7 +5,8 @@
     </div>
   <% end %>
   <%= f.simple_fields_for :attatchments do |attatchment_form| %>
-    <%= attatchment_form.input :file, input_html: {multiple: true, :name=>'message[attatchments_attributes][][file]'} %>
+    <span id="fake_file_btn">+</span>
+    <%= attatchment_form.input :file, :label=>false, input_html: {multiple: true,  :name=>'message[attatchments_attributes][][file]'} %>
   <% end %>
   <div class="field">
     <%= f.input :body, {:label=>false, :as=>'text', :input_html=>{:placeholder=>'Type your messages', :class=>'submit_on_enter'}} %>

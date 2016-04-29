@@ -4,9 +4,12 @@
   </strong>
   <div class="row">
     <div class="col-md-12">
-      <h4>Conversations<span style="font-size:12px;">(<%= @conversations.count() %>)</span><h4>
+      <h4>Conversations<span style="font-size:12px;">(<%= @conversations.count() %>)<span style="float:right;"><%= link_to '', new_conversation_path, :class=> "glyphicon glyphicon-plus", :title=> 'add conversation' %></span></span>
+        
+      <h4>
       <% @conversations.each do |conversation| %>
-        <div class="col-md-12"><p><%= link_to conversation.name, conversation %></p></div>
+        <div class="col-md-12"><p><%= link_to conversation.name, conversation %></p>
+    </div>
       <% end %>
        
       <h4>Direct Messages</h4>

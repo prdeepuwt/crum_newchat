@@ -28,8 +28,11 @@
     color: #000;
 }
 .bar {
-    height: 18px;
+    height: 5px; width:80.5%;
     background: green;
+}
+.star.star-nav {
+  margin-top: 14px;
 }
 .add{margin:10px auto;}
 .logo a{
@@ -58,8 +61,12 @@ font-size:30px; font-family:arial; color:#000; font-weight:bold;
   margin-top: 7px;
 }
 #message_body {
+  height: 45px;
   margin: 5px 0 !important;
-  width: 100%;
+  width: 77.5%;
+}
+#progress {
+  height: 4px;
 }
 .message-user > p {
   margin-left: 10px;
@@ -80,7 +87,7 @@ font-size:30px; font-family:arial; color:#000; font-weight:bold;
   overflow-x: hidden;
   overflow-y: auto;
 }
-.footer{position:fixed; bottom:0px; float:right;left:25%;}
+.footer{position:fixed; bottom:0px; float:right;}
 .col-md-12.chhat {
   box-shadow: 9px 1px 6px #ccc;
   margin: 4px 0;
@@ -117,4 +124,24 @@ ul li{display:inline; padding:0px 10px;}
     width: 19px !important;
 }
 .row { margin: 0; padding: 0 }
+
+.file.optional {
+  float: left;
+  height: 46px;
+  margin-top: 2px;
+  width: 40px; position:relative;
+}
+#fake_file_btn {
+  background: #ccc none repeat scroll 0 0;
+  color: #fff;
+  font-size: 38px;
+  height: 43px;
+  left: 18px;
+  line-height: 37px;
+  position: absolute;
+  text-align: center;
+  top: 6px;
+  width: 40px;
+}
+#message_attatchments_attributes_0_file{ opacity: 0;}
 
