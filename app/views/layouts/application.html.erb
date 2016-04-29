@@ -21,7 +21,7 @@
           <li><%= link_to "Profile", current_user %></li>
           <li><%= link_to "My Time table", time_tables_path %></li>
           <li><%= link_to "Conversations", conversations_path %></li>
-          <li><%= link_to "", bookmarks_path, class: 'star star-nav', title: 'show bookmarks' %></li>
+          <li><%= link_to "Bookmarks", bookmarks_path %></li>
           <li><%= link_to "Tags", tags_path %></li>
         </ul>
         <span><%= link_to 'Logout', destroy_user_session_path, method: :delete, :class => 'logout' %></span>
